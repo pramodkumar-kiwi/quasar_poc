@@ -98,7 +98,7 @@ function update_user_html(element, user_message) {
  */
 function update_ai_html(response, element) {
       var htmlContent = '<div class="bot-message"><div class="bot-thumb"><img src="'+
-      load_constant.base_url +'/static/images/fred.png" alt="Quasar Market" /></div><p>' +
+      '/static/images/ai_image.jpg" alt="Quasar Market" /></div><p>' +
        response.data.message.replace(/\n/g, '<br>') + '</p></div>';
       element.innerHTML += htmlContent;
       scrollToBottom(element);

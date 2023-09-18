@@ -65,25 +65,26 @@ class Chatbot:
                 else:
                     str_value = None
             else:
-                extra_text = '<br><a href="https://www.sec.gov/edgar">Refer by Edger</a>'
+                extra_text = '<br><a href="https://www.sec.gov/edgar" target="_blank">Refer by Edger</a>'
                 short_keyword = reduce(lambda a, b: a + " " + str(b), keywords)
                 full_text_search_data = FullTextSearchApi(api_key="b179f25e70892b7d8eecc427f82de33fa30441518cecdeea9dac5790d18bd6fb")
                 query = {
                     "query": short_keyword,
-                    "formTypes": ['8-K', '10-Q'],
                     "startDate": '2013-01-01',
                     "endDate": '2023-01-01',
                 }
                 filings = full_text_search_data.get_filings(query)
                 if filings:
                     edger_dict = filings['filings'][0]
+                    if filings['filings'][0] and filings['filings'][0]['filingUrl']:
+                        extra_text = '<br><a href="https://www.sec.gov/edgar" target="_blank">Refer by Edger</a> &nbsp&nbsp&nbsp&nbsp&nbsp<a href="'+ filings['filings'][0]['filingUrl'] + '" target="_blank">Click Document</a>'
                     str_value = json.dumps(edger_dict)
                 else:
                     str_value = None
 
             if str_value:
                 prompt = "This is" + str_value + "Data. Please give the summary of the above data in detailed points with headings and subheadings"
-                openai.api_key = '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'
+                openai.api_key = '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'
                 # Generate the summary
                 response = openai.Completion.create(
                     engine="text-davinci-003",
