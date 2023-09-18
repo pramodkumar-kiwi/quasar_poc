@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load static %}
+{% load common %}
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Quaser Market AI | {{ request.resolver_match.view_name|slice:"4:"|capfirst }} </title>
+  <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Manrope:wght@300;400;500;700&family=Merriweather:wght@700&display=swap">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="{% static 'js/lib/jquery.min.js' %}"></script>
+  <script>
+  var load_constant = {% load_constant %}
+</script>
+</head>
+{% block content %}
+{% endblock %}
+<div class="toast-wrapper" id="toast-wrapper">
+  <div class="toast">
+    <p> <img class="info-icon" src="{% static 'images/info-icon.svg' %}" alt="Close Icon"><span id="err-text"></span></p>
+    <a id="close-toast" class="close-toast"> <img src="{% static 'images/close-square.svg' %}" alt="Close Icon"> </a>
+  </div>
+</div>
+<script src="{% static 'js/lib/jquery.validate.min.js' %}"></script>
+{% block js_script %}{% endblock %}
+<script>
+ $(document).ready(function() {
+  $('#close-toast').click(function() {
+    $('#toast-wrapper').removeClass('show');
+  });
+});
+</script>
+<script>
+ window.addEventListener("beforeunload", (event) => {
+  const targetDiv = document.querySelector(".user-message");
+  if (targetDiv) {
+    event.preventDefault();
+    event.returnValue = "Changes that you made may not be saved.";
+  }
+});
+ window.addEventListener("unload", deleteAllCookies());
+
+function deleteAllCookies() {
+  sessionStorage.clear();
+}
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var video = document.getElementById('animated-video1');
+  var video1 = document.getElementById('animated-video');
+  var browser_name = get_browser_name();
+  if (browser_name == "Safari") {
+    video1.style.display = 'block';
+  } else {
+    video.style.display = 'block';
+  }
+});
+function get_browser_name(){
+    var userAgent = navigator.userAgent;
+    var browserName;
+    if (/Firefox/i.test(userAgent)) {
+      browserName = 'Mozilla Firefox';
+    } else if (/Chrome/i.test(userAgent)) {
+      browserName = 'Chrome';
+    } else if (/Safari/i.test(userAgent)) {
+      browserName = 'Safari';
+    } else if (/Edg/i.test(userAgent)) {
+      browserName = 'Edge';
+    } else if (/Opera|OPR/i.test(userAgent)) {
+      browserName = 'Opera';
+    } else if (/Trident/i.test(userAgent)) {
+      browserName = 'Internet Explorer';
+    } else {
+      browserName = 'this browser';
+    }
+    return browserName
+}
+</script>
+</html>

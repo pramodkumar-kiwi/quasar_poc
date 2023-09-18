@@ -1,0 +1,28 @@
+{% load static %}
+<div class="left-section">
+  <div class="header-logo">
+    <p> Welcome to </p>
+    <a href="/">  <img src="{% static 'images/logo.png' %}" alt="Gondola Life Logo" /> </a>
+  </div>
+  <div class="chatbot-avatar-img">
+    <video class="animated-video" id="animated-video" autoplay loop muted style="display: none;">
+      <source src="{% static 'video/GondolaAnimation.mp4' %}" type="video/mp4">
+    </video>
+    <video class="animated-video" id="animated-video1" autoplay loop muted style="display: none;">
+      <source src="{% static 'video/GondolaAnimation.webm' %}" type="video/webm">
+    </video>
+  </div>
+  <div class="your-attendant">
+    <p> Hey there!<br>
+      I'm <span> Gondie, </span> <br>
+     your Gondola attendant </p>
+  </div>
+  <div class="chat-with-gondie">
+    <a href='insurance' class="primary-btn chat-btn"> Chat with Gondie </a>
+  </div>
+  <div class="copyright-txt">
+    <p> © Copyright <script>
+        document.write(new Date().getFullYear());
+      </script> Gondola Life® of  Gondola InsurTech Corp. All rights reserved.</p>
+  </div>
+</div>

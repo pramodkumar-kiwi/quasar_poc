@@ -1,0 +1,34 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+<script src="{% static 'js/application_form.js' %}"></script>
+<div class="chat-pg-wrapper">
+  {% include 'layouts/chat-left.html' %}
+    <div class="right-section">
+      <div class="chat-wrapper">
+        {% include 'layouts/chat-header.html' %}
+        <div class="main-landmark">
+          <div class="chat-body active" id="insurance-app-chat">
+          <div class="lets-go-chat">
+            <div class="content">
+              <p> Completing your application is super easy when we do it together.  And doing it together will make sure you get the best results from the insurance company.  Are you ready to answer a few basic questions? </p>
+              <div class="action-btn">
+                <button class="not-now-btn" onclick="window.location.href = '/';"> Not Now </button>
+                <button class="lets-do-btn" id="letsDoButton"> Let’s Do It </button>
+              </div>
+            </div>
+          </div>
+          <div class="bot-message">
+            <div class="bot-thumb">
+              <img src="{% static 'images/gondie.svg' %}" alt="Gondie Thumbnail" />
+            </div>
+            <p> Please choose "Let's do it" if you are agreed  </p>
+          </div>
+        </div>
+          {% include 'layouts/application-chat-footer.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="{% static 'js/speech_recognition.js' %}"></script>
+{% endblock %}

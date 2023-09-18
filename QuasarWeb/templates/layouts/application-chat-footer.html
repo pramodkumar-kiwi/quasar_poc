@@ -1,0 +1,24 @@
+{% load static %}
+<div  class="bot-typing">
+  <div class="loader"></div>
+</div>
+<form  method="post" autocomplete="off" id="applicationChatForm" >
+  {% csrf_token %}
+<div class="chat-footer">
+  <div class="type-message">
+    <textarea id="message-id" rows="1" name="answer" maxlength="500" placeholder="Type your message here"></textarea>
+  </div>
+<!--  <div class="mic-send-btn">-->
+<!--    <button type="button" id="startRecordingButton" class="applicationStartRecording mic-icon"> <img src="{% static 'images/mic-icon.svg' %}" alt="Mic Icon" /> </button>-->
+<!--    <button disabled type="submit" id="formButton" class="applicationChat send-icon"> <img src="{% static 'images/send-icon.svg' %}" alt="Send Icon" /> </button>-->
+<!--  </div>-->
+</div>
+</form>
+<script>
+$(document).ready(function() {
+  $('#formButton').on('click', function() {
+    var element = document.getElementById("message-id");
+    element.focus();
+  });
+});
+</script>

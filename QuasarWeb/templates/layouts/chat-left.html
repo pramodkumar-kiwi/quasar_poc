@@ -1,0 +1,24 @@
+{% load static %}
+<div class="left-section">
+    <div class="header-logo">
+     <a href="/">  <img src="{% static 'images/fred_logo.png' %}" alt="Quasar Market Logo" /> </a>
+    </div>
+    <div class="gondie-intro">
+      <h2> Quasar Market AI Tools </h2>
+    </div>
+    <div class="insurance-action-button">
+        <a id="know-about-insurance" class="secondary-btn {% if request.resolver_match.view_name == 'web:fred' %}active{% endif %} mr-b-20" href="{% if request.resolver_match.view_name != 'web:fred' %}fred{% else %}javascript:void(0){% endif %}"> Fred </a>
+        <a id="insurance-app" class="secondary-btn {% if request.resolver_match.view_name == 'web:edger' %}active{% endif %}" href="{% if request.resolver_match.view_name != 'web:edger' %}edger{% else %}javascript:void(0){% endif %}"> Edger</a>
+    </div>
+    {% if request.resolver_match.view_name == 'web:fred' %}
+      <input type="hidden" id="is_fred_api" name="is_fred_api" value="fred">
+    {% elif request.resolver_match.view_name == 'web:edger' %}
+      <input type="hidden" id="is_fred_api" name="is_fred_api" value="edger">
+    {% endif %}
+
+    <div class="copyright-txt">
+      <p> © Copyright <script>
+        document.write(new Date().getFullYear());
+      </script> Quasar Market. All rights reserved.</p>
+    </div>
+</div>

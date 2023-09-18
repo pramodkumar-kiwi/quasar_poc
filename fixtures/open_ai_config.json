@@ -1,0 +1,9 @@
+[
+{
+    "model": "ai_engine.openaiconfig",
+    "pk": 1,
+    "fields": {
+        "temperature": 0.3
+    }
+}
+]

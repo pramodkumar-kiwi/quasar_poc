@@ -1,0 +1,13 @@
+{% extends "admin/change_form.html" %}
+{% block extrahead %}
+    {{ block.super }}
+    <script>
+        django.jQuery(document).ready(function() {
+            django.jQuery('.submit-row input[name="_continue"], .submit-row input[name="_save"]').click(function(e) {
+                if (!confirm("Are you sure you want to save?")) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+{% endblock %}
