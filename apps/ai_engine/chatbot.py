@@ -2,12 +2,14 @@
 Used for Chatbot lib
 """
 import copy
+
 import datetime
 import json
 import fredapi as fd
 import spacy
 from sec_api import FullTextSearchApi
 
+from Quasar import settings
 nlp = spacy.load("en_core_web_sm")
 
 import openai
@@ -56,18 +58,20 @@ class Chatbot:
                 extra_text = '<br><a href="https://fred.stlouisfed.org/" target="_blank">Refer by Fred</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#">Click Graph</a>'
                 short_keyword = reduce(lambda a, b: a + "+" + str(b), keywords)
 
-                fred = fd.Fred(api_key="fb9cf1b2cdac00d7e214ff8f48c8aafe")
+                fred = fd.Fred(api_key=settings.FRED_KEY)
                 fred_data = fred.search(short_keyword)
                 if not fred_data.empty:
                     series_number = fred_data['id'][0]
                     result = fred.get_series(series_number)
                     str_value = result.to_string()
+                    act_prompt = "This is" + str_value + "Data. Please give the summary of the above data in detailed points with headings and subheadings with percent value"
+                    #act_prompt = str_value + "<br>this is  time series data of the question " + message + ". give answer to the question mentioned as a question in percent value"
                 else:
                     str_value = None
             else:
                 extra_text = '<br><a href="https://www.sec.gov/edgar" target="_blank">Refer by Edger</a>'
                 short_keyword = reduce(lambda a, b: a + " " + str(b), keywords)
-                full_text_search_data = FullTextSearchApi(api_key="b179f25e70892b7d8eecc427f82de33fa30441518cecdeea9dac5790d18bd6fb")
+                full_text_search_data = FullTextSearchApi(api_key=settings.EDGER_KEY)
                 query = {
                     "query": short_keyword,
                     "startDate": '2013-01-01',
@@ -79,12 +83,13 @@ class Chatbot:
                     if filings['filings'][0] and filings['filings'][0]['filingUrl']:
                         extra_text = '<br><a href="https://www.sec.gov/edgar" target="_blank">Refer by Edger</a> &nbsp&nbsp&nbsp&nbsp&nbsp<a href="'+ filings['filings'][0]['filingUrl'] + '" target="_blank">Click Document</a>'
                     str_value = json.dumps(edger_dict)
+                    act_prompt = "This is" + str_value + "Data. Please give the summary of the above data in detailed points with headings and subheadings"
                 else:
                     str_value = None
 
             if str_value:
-                prompt = "This is" + str_value + "Data. Please give the summary of the above data in detailed points with headings and subheadings"
-                openai.api_key = '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'
+                prompt = act_prompt
+                openai.api_key = settings.OPEN_GPT_KEY
                 # Generate the summary
                 response = openai.Completion.create(
                     engine="text-davinci-003",

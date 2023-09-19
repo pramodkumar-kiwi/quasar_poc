@@ -158,7 +158,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Get Open Api Key
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+# OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
@@ -207,9 +207,9 @@ CORS_EXPOSE_HEADERS = (
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # To Define AWS
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+# AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 
 # for s3 bucket
 DEFAULT_FILE_STORAGE = 'apps.common.services.storage_backend.CustomFileStorage'
@@ -226,3 +226,7 @@ BASE_URL = os.getenv('BASE_URL')
 
 # Base API URL
 API_BASE_URL = BASE_URL + '/' + API_VERSION_URL
+
+OPEN_GPT_KEY = os.getenv('OPEN_GPT_KEY')
+FRED_KEY = os.getenv('FRED_KEY')
+EDGER_KEY = os.getenv('EDGER_KEY')
